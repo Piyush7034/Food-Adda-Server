@@ -6,6 +6,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.infy.dto.DishDTO;
+
 @Entity
 @Table(name = "dish")
 public class Dish {
@@ -92,5 +94,34 @@ public class Dish {
 		this.imageUrl = imageUrl;
 	}
 	
+	public DishDTO getDishDTOFromDish() {
+		DishDTO dishDTO = new DishDTO();
+		dishDTO.setDishId(this.getDishId());
+		dishDTO.setDishName(this.getDishName());
+		dishDTO.setDishType(this.getDishType());
+		dishDTO.setDishDescription(this.getDishDescription());
+		dishDTO.setDishCuisine(this.getDishCuisine());
+		dishDTO.setSpeciality(this.getSpeciality());
+		dishDTO.setPrice(this.getPrice());
+		dishDTO.setImageUrl(this.getImageUrl());
+		dishDTO.setAvgRating(this.getAvgRating());
+		
+		return dishDTO;
+	}
+	
+	public static Dish getDishFromDishDTO(DishDTO dishDTO) {
+		Dish dish = new Dish();
+		dish.setDishId(dishDTO.getDishId());
+		dish.setDishName(dishDTO.getDishName());
+		dish.setDishType(dishDTO.getDishType());
+		dish.setDishDescription(dishDTO.getDishDescription());
+		dish.setDishCuisine(dishDTO.getDishCuisine());
+		dish.setSpeciality(dishDTO.getSpeciality());
+		dish.setPrice(dishDTO.getPrice());
+		dish.setImageUrl(dishDTO.getImageUrl());
+		dish.setAvgRating(dishDTO.getAvgRating());
+		
+		return dish;
+	}
 	
 }

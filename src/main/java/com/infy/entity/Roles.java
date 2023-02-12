@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.infy.dto.Role;
+import com.infy.dto.RolesDTO;
 
 @Entity
 @Table(name="roles")
@@ -31,5 +32,19 @@ public class Roles {
 		this.roleType = role;
 	}
 
+	public RolesDTO getRolesDTOFromRoles() {
+		RolesDTO roleDTO = new RolesDTO();
+		roleDTO.setRoleId(this.getRoleId());
+		roleDTO.setRoleType(this.getRoleType());
+		
+		return roleDTO;
+	}
 	
+	public static Roles getRolesFromRolesDTO(RolesDTO rolesDTO) {
+		Roles role = new Roles();
+		role.setRoleId(rolesDTO.getRoleId());
+		role.setRoleType(rolesDTO.getRoleType());
+		
+		return role;
+	}
 }

@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.infy.dto.CouponDTO;
+
 @Entity
 @Table(name="coupon")
 public class Coupon {
@@ -59,4 +61,27 @@ public class Coupon {
 		this.endDate = endDate;
 	}
 	
+	public CouponDTO getCouponDTOFromCoupon() {
+		CouponDTO couponDTO = new CouponDTO();
+		couponDTO.setCouponId(this.getCouponId());
+		couponDTO.setCouponCode(this.getCouponCode());
+		couponDTO.setMinimumBill(this.getMinimumBill());
+		couponDTO.setMaximumRedemption(this.getMaximumRedemption());
+		couponDTO.setStartDate(this.getStartDate());
+		couponDTO.setEndDate(this.getEndDate());
+		
+		return couponDTO;
+	}
+	
+	public static Coupon getCouponFromCouponDTO(CouponDTO couponDTO) {
+		Coupon coupon = new Coupon();
+		coupon.setCouponId(couponDTO.getCouponId());
+		coupon.setCouponCode(couponDTO.getCouponCode());
+		coupon.setMinimumBill(couponDTO.getMinimumBill());
+		coupon.setMaximumRedemption(couponDTO.getMaximumRedemption());
+		coupon.setStartDate(couponDTO.getStartDate());
+		coupon.setEndDate(couponDTO.getEndDate());
+		
+		return coupon;
+	}
 }

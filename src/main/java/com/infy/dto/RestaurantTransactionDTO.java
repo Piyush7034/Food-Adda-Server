@@ -31,5 +31,4 @@ public class RestaurantTransactionDTO {
 	public void setRestaurantStatus(Boolean restaurantStatus) {
 		this.restaurantStatus = restaurantStatus;
 	}
-	
 }

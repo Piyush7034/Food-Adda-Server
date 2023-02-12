@@ -20,7 +20,6 @@ public class RestaurantDTO {
 	private String restaurantContact;
 	
 	@NotNull(message="{Restaurant.INVALID_RESTAURANT_TYPE}")
-	@Pattern(regexp = "", message = "{Restaurant.INVALID_RESTAURANT_TYPE}")
 	private String restaurantType;
 	
 	@NotNull(message="{Restaurant.INVALID_RESTAURANT_STREET}")

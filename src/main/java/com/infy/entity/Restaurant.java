@@ -1,5 +1,6 @@
 package com.infy.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -11,6 +12,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.infy.dto.DishDTO;
+import com.infy.dto.RestaurantDTO;
 
 @Entity
 @Table(name="restaurant")
@@ -123,6 +127,46 @@ public class Restaurant {
 		this.transaction = transaction;
 	}
 
+	public RestaurantDTO getRestaurantDTOFromRestaurant() {
+		RestaurantDTO restaurantDTO = new RestaurantDTO();
+		restaurantDTO.setRestaurantId(this.getRestaurantId());
+		restaurantDTO.setRestaurantName(this.getRestaurantName());
+		restaurantDTO.setRestaurantContact(this.getRestaurantContact());
+		restaurantDTO.setRestaurantType(this.getRestaurantType());
+		restaurantDTO.setAddressLine1(this.getAddressLine1());
+		restaurantDTO.setArea(this.getArea());
+		restaurantDTO.setCity(this.getCity());
+		restaurantDTO.setPincode(this.getPincode());
+		restaurantDTO.setAvgRating(this.getAvgRating());
+		restaurantDTO.setApprovalStatus(this.getApprovalStatus());
+		restaurantDTO.setResState(this.getResState());
+		List<DishDTO> dishDTOList = new ArrayList<>();
+		this.dishes.
+				forEach(dish -> dishDTOList.add(dish.getDishDTOFromDish()));
+		restaurantDTO.setDishes(dishDTOList);
+		
+		return restaurantDTO;
+	}
 	
+	public static Restaurant getRestaurantFromRestaurantDTO(RestaurantDTO restaurantDTO) {
+		Restaurant restaurant = new Restaurant();
+		restaurant.setRestaurantId(restaurantDTO.getRestaurantId());
+		restaurant.setRestaurantName(restaurantDTO.getRestaurantName());
+		restaurant.setRestaurantContact(restaurantDTO.getRestaurantContact());
+		restaurant.setRestaurantType(restaurantDTO.getRestaurantType());
+		restaurant.setAddressLine1(restaurantDTO.getAddressLine1());
+		restaurant.setArea(restaurantDTO.getArea());
+		restaurant.setCity(restaurantDTO.getCity());
+		restaurant.setPincode(restaurantDTO.getPincode());
+		restaurant.setAvgRating(restaurantDTO.getAvgRating());
+		restaurant.setApprovalStatus(restaurantDTO.getApprovalStatus());
+		restaurant.setResState(restaurantDTO.getResState());
+		List<Dish> dishList = new ArrayList<>();
+		restaurantDTO.getDishes().
+				forEach(dishDTO -> dishList.add(Dish.getDishFromDishDTO(dishDTO)));
+		restaurant.setDishes(dishList);
+		
+		return restaurant;
+	}
 
 }

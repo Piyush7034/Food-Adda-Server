@@ -12,6 +12,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.infy.dto.UsersDTO;
+
 @Entity
 @Table(name="users")
 public class Users {
@@ -110,5 +112,36 @@ public class Users {
 		this.ordersList = ordersList;
 	}
 	
+	UsersDTO getUserDTOFromUser() {
+		UsersDTO userDTO = new UsersDTO();
+		
+		userDTO.setUserId(this.getUserId());
+		userDTO.setUserName(this.getUserName());
+		userDTO.setEmailId(this.getEmailId());
+		userDTO.setContactNumber(this.getContactNumber());
+		userDTO.setPassword(this.getPassword());
+		userDTO.setAddressList(null);
+		userDTO.setOrdersList(null);
+		userDTO.setRestaurants(null);
+		userDTO.setUserLikesList(null);
+		userDTO.setRoles(null);
+		userDTO.setWallet(null);
+		return userDTO;
+	}
 	
+	static Users getUserFromUserDTO(UsersDTO userDTO) {
+		Users user = new Users();
+		user.setUserId(userDTO.getUserId());
+		user.setUserName(userDTO.getUserName());
+		user.setEmailId(userDTO.getEmailId());
+		user.setContactNumber(userDTO.getContactNumber());
+		user.setPassword(userDTO.getPassword());
+		user.setAddressList(null);
+		user.setOrdersList(null);
+		user.setRestaurants(null);
+		user.setRoles(null);
+		user.setUserLikesList(null);
+		user.setWallet(null);
+		return user;
+	}
 }

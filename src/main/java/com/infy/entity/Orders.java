@@ -1,5 +1,6 @@
 package com.infy.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -10,6 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.infy.dto.OrderItemsDTO;
+import com.infy.dto.OrdersDTO;
 
 @Entity
 @Table(name="orders")
@@ -48,6 +52,35 @@ public class Orders {
 	}
 	public void setOrderItemsList(List<OrderItems> orderItemsList) {
 		this.orderItemsList = orderItemsList;
+	}
+	
+	public OrdersDTO getOrdersDTOFromOrders() {
+		OrdersDTO ordersDTO = new OrdersDTO();
+		ordersDTO.setOrderId(this.getOrderId());
+		ordersDTO.setOrderBill(this.getOrderBill());
+		ordersDTO.setOrderStatus(this.getOrderStatus());
+		List<OrderItemsDTO> orderItemsDTOList = new ArrayList<>();
+		this.orderItemsList.
+						forEach(orderItem -> orderItemsDTOList.
+											add(orderItem.getOrderItemsDTOFromOrderItems()));
+		
+		ordersDTO.setOrderItemsList(orderItemsDTOList);
+		
+		return ordersDTO;
+	}
+	
+	public static Orders getOrdersFromOrdersDTO(OrdersDTO ordersDTO) {
+		Orders orders = new Orders();
+		orders.setOrderId(ordersDTO.getOrderId());
+		orders.setOrderBill(ordersDTO.getOrderBill());
+		orders.setOrderStatus(ordersDTO.getOrderStatus());
+		List<OrderItems> orderItemsList = new ArrayList<>();
+		ordersDTO.getOrderItemsList().
+						forEach(orderItemsDTO -> orderItemsList.add(OrderItems.getOrderItemsFromOrderItemsDTO(orderItemsDTO)));
+		
+		orders.setOrderItemsList(orderItemsList);
+		
+		return orders;
 	}
 	
 }

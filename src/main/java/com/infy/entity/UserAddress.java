@@ -6,6 +6,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.infy.dto.UserAddressDTO;
+
 @Entity
 @Table(name="user_address")
 public class UserAddress {
@@ -69,6 +71,34 @@ public class UserAddress {
 		this.pincode = pincode;
 	}
 
+	public UserAddressDTO getAddressDTOFromAddress() {
+		UserAddressDTO userAddressDTO = new UserAddressDTO();
+		
+		userAddressDTO.setUserAddressId(this.getUserAddressId());
+		userAddressDTO.setAddressLine1(this.getAddressLine1());
+		userAddressDTO.setAddressLine2(this.getAddressLine2());
+		userAddressDTO.setArea(this.getArea());
+		userAddressDTO.setCity(this.getCity());
+		userAddressDTO.setPincode(this.getPincode());
+		userAddressDTO.setUserAddressName(this.getUserAddressName());
+		userAddressDTO.setUserState(this.getUserState());
+		
+		return userAddressDTO;
+	}
 	
+	public static UserAddress getAddressFromAddressDTO(UserAddressDTO userAddressDTO) {
+		UserAddress userAddress = new UserAddress();
+		
+		userAddress.setUserAddressId(userAddressDTO.getUserAddressId());
+		userAddress.setAddressLine1(userAddressDTO.getAddressLine1());
+		userAddress.setAddressLine2(userAddressDTO.getAddressLine2());
+		userAddress.setArea(userAddressDTO.getArea());
+		userAddress.setCity(userAddressDTO.getCity());
+		userAddress.setPincode(userAddressDTO.getPincode());
+		userAddress.setUserAddressName(userAddressDTO.getUserAddressName());
+		userAddress.setUserState(userAddressDTO.getUserState());
+		
+		return userAddress;
+	}
 
 }

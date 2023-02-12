@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.infy.dto.OrderItemsDTO;
+
 @Entity
 @Table(name="order_items")
 public class OrderItems {
@@ -39,4 +41,21 @@ public class OrderItems {
 		this.qty = qty;
 	}
 	
+	public OrderItemsDTO getOrderItemsDTOFromOrderItems() {
+		OrderItemsDTO orderItemsDTO = new OrderItemsDTO();
+		orderItemsDTO.setOrderItemsId(this.getOrderItemsId());
+		orderItemsDTO.setDish(this.dish.getDishDTOFromDish());
+		orderItemsDTO.setQty(this.getQty());
+		
+		return orderItemsDTO;
+	}
+	
+	public static OrderItems getOrderItemsFromOrderItemsDTO(OrderItemsDTO orderItemsDTO) {
+		OrderItems orderItems = new OrderItems();
+		orderItems.setOrderItemsId(orderItemsDTO.getOrderItemsId());
+		orderItems.setDish(Dish.getDishFromDishDTO(orderItemsDTO.getDish()));
+		orderItems.setQty(orderItemsDTO.getQty());
+		
+		return orderItems;
+	}
 }

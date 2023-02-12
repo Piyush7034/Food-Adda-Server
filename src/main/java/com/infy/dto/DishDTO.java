@@ -18,7 +18,7 @@ public class DishDTO {
 	@NotNull(message="{Dish.INVALID_DISH_TYPE}")
 	private String dishType;
 	
-	@NotNull(message="{Dish.INVALID_DISH_}")
+	@NotNull(message="{Dish.INVALID_DISH_DESCRIPTION}")
 	private String dishDescription;
 	
 	@NotNull(message="{Dish.INVALID_DISH_PRICE}")
