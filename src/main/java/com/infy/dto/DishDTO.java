@@ -1,16 +1,32 @@
 package com.infy.dto;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 public class DishDTO {
 
 	//Add the required annotation
 	private Integer dishId;
+	@NotNull(message="{Dish.INVALID_DISH_NAME}")
+	@Pattern(regexp = "[A-Za-z]+( [A-Za-z]+)*", message = "{Dish.INVALID_DISH_NAME}")
 	private String dishName;
+	
+	@NotNull(message="{Dish.INVALID_DISH_CUISINE}")
 	private String dishCuisine;
+	
+	@NotNull(message="{Dish.INVALID_DISH_TYPE}")
 	private String dishType;
+	
+	@NotNull(message="{Dish.INVALID_DISH_}")
 	private String dishDescription;
+	
+	@NotNull(message="{Dish.INVALID_DISH_PRICE}")
+	@Min(value = 0, message = "{Dish.INVALID_DISH_PRICE}")
 	private Double price;
 	private Double avgRating;
+	
+	@NotNull(message="{Dish.INVALID_DISH_SPECIALITY}")
 	private String speciality;
 	private String imageUrl;
 

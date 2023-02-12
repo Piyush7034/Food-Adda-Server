@@ -2,19 +2,47 @@ package com.infy.dto;
 
 import java.util.List;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 public class RestaurantDTO {
 	
 	//Add the required annotation
 	private Integer restaurantId;
+	
+	@NotNull(message="{Restaurant.INVALID_RESTAURANT_NAME}")
+	@Pattern(regexp = "[A-Za-z]+( [A-Za-z]+)*", message = "{Restaurant.INVALID_RESTAURANT_NAME}")
 	private String restaurantName;
+	
+	@NotNull(message="{Restaurant.INVALID_RESTAURANT_CONTACT}")
+	@Pattern(regexp = "[6-9][0-9]{9}", message = "{Restaurant.INVALID_RESTAURANT_CONTACT}")
 	private String restaurantContact;
+	
+	@NotNull(message="{Restaurant.INVALID_RESTAURANT_TYPE}")
+	@Pattern(regexp = "", message = "{Restaurant.INVALID_RESTAURANT_TYPE}")
 	private String restaurantType;
+	
+	@NotNull(message="{Restaurant.INVALID_RESTAURANT_STREET}")
+	@Pattern(regexp = "[A-Za-z0-9-/., ]+", message = "{Restaurant.INVALID_RESTAURANT_STREET}")
 	private String addressLine1;
+	
+	@NotNull(message="{Restaurant.INVALID_RESTAURANT_AREA}")
+	@Size(min = 3, message = "{Restaurant.INVALID_RESTAURANT_AREA}")
 	private String area;
+	
+	@NotNull(message="{Restaurant.INVALID_RESTAURANT_CITY}")
+	@Size(min = 3, message = "{Restaurant.INVALID_RESTAURANT_CITY}")
 	private String city;
+	
+	@NotNull(message="{Restaurant.INVALID_RESTAURANT_STATE}")
 	private String resState;
+	
+	@Pattern(regexp = "[1-9][0-9]{5}", message = "{Restaurant.INVALID_RESTAURANT_PIN}")
 	private Integer pincode;
 	private String approvalStatus;
+	
+	@Pattern(regexp = "[1-5]", message = "{Restaurant.INVALID_RESTAURANT_RATING}")
 	private double avgRating;
 	private List<DishDTO> dishes;
 	private List<String> photoUrls;

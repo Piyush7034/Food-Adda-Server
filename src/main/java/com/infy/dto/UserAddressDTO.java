@@ -1,24 +1,24 @@
 package com.infy.dto;
 
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 public class UserAddressDTO {
 	private Integer userAddressId;
-	@NotBlank(message = "{UserAddress.INVALID_NAME}")
+	@NotNull(message = "{UserAddress.INVALID_NAME}")
 	@Pattern(regexp = "[A-Za-z0-9-/., ]+", message = "{UserAddress.INVALID_NAME}")
 	private String userAddressName;
-	@NotBlank(message = "{UserAddress.INVALID_ADDRESS_LINE1}")
+	@NotNull(message = "{UserAddress.INVALID_ADDRESS_LINE1}")
 	@Pattern(regexp = "[A-Za-z0-9-/., ]+", message = "{UserAddress.INVALID_ADDRESS_LINE1}")
 	private String addressLine1;
-	@NotBlank(message = "{UserAddress.INVALID_ADDRESS_LINE2}")
+	@NotNull(message = "{UserAddress.INVALID_ADDRESS_LINE2}")
 	@Pattern(regexp = "[A-Za-z0-9-/., ]+", message = "{UserAddress.INVALID_ADDRESS_LINE2}")
 	private String addressLine2;
-	@NotBlank(message = "{UserAddress.INVALID_ADDRESS_AREA}")
+	@NotNull(message = "{UserAddress.INVALID_ADDRESS_AREA}")
 	@Size(min = 3, message = "{UserAddress.INVALID_ADDRESS_AREA}")
 	private String area;
-	@NotBlank(message = "{UserAddress.INVALID_ADDRESS_CITY}")
+	@NotNull(message = "{UserAddress.INVALID_ADDRESS_CITY}")
 	@Size(min = 3, message = "{UserAddress.INVALID_ADDRESS_CITY}")
 	private String city;
 	private String userState;
