@@ -16,5 +16,5 @@ public interface AdminServices {
 	
 	public List<RestaurantDTO> getRestaurant() throws Exception;
 	
-	public List<RestaurantDTO> newlyAddedRstaurant() throws Exception;
+	public List<RestaurantDTO> newlyAddedRestaurant() throws Exception;
 }

@@ -19,13 +19,12 @@ import com.infy.service.OrderService;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("orderAPI")
+@RequestMapping("/order-api")
 public class OrderAPI {
 	
 	@Autowired
 	private OrderService orderService;
 
-	
 	static Logger logger = LogManager.getLogger(OrderAPI.class.getName());
 	
 	@GetMapping(value = "viewAllOrders/{userId}")

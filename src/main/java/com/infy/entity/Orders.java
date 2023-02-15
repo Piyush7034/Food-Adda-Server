@@ -63,7 +63,6 @@ public class Orders {
 		this.orderItemsList.
 						forEach(orderItem -> orderItemsDTOList.
 											add(orderItem.getOrderItemsDTOFromOrderItems()));
-		
 		ordersDTO.setOrderItemsList(orderItemsDTOList);
 		
 		return ordersDTO;
@@ -76,8 +75,8 @@ public class Orders {
 		orders.setOrderStatus(ordersDTO.getOrderStatus());
 		List<OrderItems> orderItemsList = new ArrayList<>();
 		ordersDTO.getOrderItemsList().
-						forEach(orderItemsDTO -> orderItemsList.add(OrderItems.getOrderItemsFromOrderItemsDTO(orderItemsDTO)));
-		
+						forEach(orderItemsDTO -> orderItemsList.
+												add(OrderItems.getOrderItemsFromOrderItemsDTO(orderItemsDTO)));
 		orders.setOrderItemsList(orderItemsList);
 		
 		return orders;

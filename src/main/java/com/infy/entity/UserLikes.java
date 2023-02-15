@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.infy.dto.UserLikesDTO;
+
 @Entity
 @Table(name="user_likes")
 public class UserLikes {
@@ -47,5 +49,23 @@ public class UserLikes {
 		this.restaurant = restaurant;
 	}
 	
+	public UserLikesDTO getUserLikesDTOFromUserLikes() {
+		UserLikesDTO userLikesDTO = new UserLikesDTO();
+		userLikesDTO.setLikeId(this.getLikeId());
+		userLikesDTO.setVegNonveg(this.getVegNonveg());
+		userLikesDTO.setDish(this.getDish().getDishDTOFromDish());
+		userLikesDTO.setRestaurant(this.getRestaurant().getRestaurantDTOFromRestaurant());
+		
+		return userLikesDTO;
+	}
 	
+	public static UserLikes getUserLikesFromUserLikesDTO(UserLikesDTO userLikesDTO) {
+		UserLikes userLikes = new UserLikes();
+		userLikes.setLikeId(userLikesDTO.getLikeId());
+		userLikes.setVegNonveg(userLikesDTO.getVegNonveg());
+		userLikes.setDish(Dish.getDishFromDishDTO(userLikesDTO.getDish()));
+		userLikes.setRestaurant(Restaurant.getRestaurantFromRestaurantDTO(userLikesDTO.getRestaurant()));
+		
+		return userLikes;
+	}
 }

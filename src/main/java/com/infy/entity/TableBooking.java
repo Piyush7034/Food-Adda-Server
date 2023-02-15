@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.infy.dto.TableBookingDTO;
+
 @Entity
 @Table(name="table_booking")
 public class TableBooking {
@@ -65,6 +67,28 @@ public class TableBooking {
 		this.user = user;
 	}
 	
+	public TableBookingDTO getTableBookingDTOFromTableBooking() {
+		TableBookingDTO tableBookingDTO = new TableBookingDTO();
+		tableBookingDTO.setBookingId(this.getBookingId());
+		tableBookingDTO.setBookingDate(this.getBookingDate());
+		tableBookingDTO.setTimeOfBooking(this.getTimeOfBooking());
+		tableBookingDTO.setNoOfPeople(this.getNoOfPeople());
+		tableBookingDTO.setRestaurant(this.getRestaurant().getRestaurantDTOFromRestaurant());
+		tableBookingDTO.setUser(this.getUser().getUserDTOFromUser());
+		
+		return tableBookingDTO;
+	}
 	
+	public static TableBooking getTableBookingFromTableBookingDTO(TableBookingDTO tableBookingDTO) {
+		TableBooking tableBooking = new TableBooking();
+		tableBooking.setBookingId(tableBookingDTO.getBookingId());
+		tableBooking.setBookingDate(tableBookingDTO.getBookingDate());
+		tableBooking.setTimeOfBooking(tableBookingDTO.getTimeOfBooking());
+		tableBooking.setNoOfPeople(tableBookingDTO.getNoOfPeople());
+		tableBooking.setRestaurant(Restaurant.getRestaurantFromRestaurantDTO(tableBookingDTO.getRestaurant()));
+		tableBooking.setUser(Users.getUserFromUserDTO(tableBookingDTO.getUser()));
+		
+		return tableBooking;
+	}
 
 }

@@ -180,7 +180,7 @@ public class AdminServicesImpl implements  AdminServices{
 	}
 	
 	@Override
-	public List<RestaurantDTO> newlyAddedRstaurant() throws FoodAddaException{
+	public List<RestaurantDTO> newlyAddedRestaurant() throws FoodAddaException{
 		
 		Iterable<Restaurant> restaurants = restaurantRepository.findAll();
 		List<RestaurantDTO> list1 = new ArrayList<>();

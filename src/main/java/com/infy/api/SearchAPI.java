@@ -17,7 +17,7 @@ import com.infy.service.SearchService;
 
 @CrossOrigin
 @RestController
-@RequestMapping("searchAPI")
+@RequestMapping("search-api")
 public class SearchAPI {
 
 	@Autowired

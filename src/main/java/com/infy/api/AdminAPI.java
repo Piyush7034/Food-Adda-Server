@@ -21,13 +21,11 @@ import com.infy.service.AdminServices;
 
 @CrossOrigin
 @RestController
-@RequestMapping("AdminAPI")
+@RequestMapping("/admin-api")
 public class AdminAPI {
 	
 	@Autowired
 	private AdminServices adminService;
-	
-
 	
 	static Logger logger = LogManager.getLogger(AdminAPI.class.getName());
 	
@@ -46,7 +44,7 @@ public class AdminAPI {
 		
 		
 			logger.info("Fetch all the restaurants which need approval");
-			List<RestaurantDTO> restaurantList = adminService.newlyAddedRstaurant();
+			List<RestaurantDTO> restaurantList = adminService.newlyAddedRestaurant();
 			return new ResponseEntity<List<RestaurantDTO>>(restaurantList, HttpStatus.OK);
 		
 	}

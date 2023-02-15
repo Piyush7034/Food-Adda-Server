@@ -80,7 +80,7 @@ public class AdminServiceTest {
 	public void invalidNewlyAddedRstaurantTest() throws Exception{
 		Mockito.when(restaurantRepository.findAll()).thenReturn(new ArrayList<Restaurant>());
 		FoodAddaException e = Assertions.assertThrows(FoodAddaException.class,
-				()-> adminServices.newlyAddedRstaurant());
+				()-> adminServices.newlyAddedRestaurant());
 		Assertions.assertEquals("AdminService.NO_NEW_RESTAURANT", e.getMessage());
 	}
 	
@@ -331,7 +331,7 @@ public class AdminServiceTest {
 		 restaurants.add(expected);
 		 Iterable<Restaurant> restaurantsList = restaurants;
 		 Mockito.when(restaurantRepository.findAll()).thenReturn(restaurantsList);
-		 Assertions.assertDoesNotThrow(()-> adminServices.newlyAddedRstaurant());
+		 Assertions.assertDoesNotThrow(()-> adminServices.newlyAddedRestaurant());
 		 
 	}
 	

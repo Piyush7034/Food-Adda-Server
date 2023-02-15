@@ -1,5 +1,6 @@
 package com.infy.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -12,6 +13,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.infy.dto.OrdersDTO;
+import com.infy.dto.RestaurantDTO;
+import com.infy.dto.RolesDTO;
+import com.infy.dto.UserAddressDTO;
+import com.infy.dto.UserLikesDTO;
 import com.infy.dto.UsersDTO;
 
 @Entity
@@ -112,7 +118,7 @@ public class Users {
 		this.ordersList = ordersList;
 	}
 	
-	UsersDTO getUserDTOFromUser() {
+	public UsersDTO getUserDTOFromUser() {
 		UsersDTO userDTO = new UsersDTO();
 		
 		userDTO.setUserId(this.getUserId());
@@ -120,28 +126,102 @@ public class Users {
 		userDTO.setEmailId(this.getEmailId());
 		userDTO.setContactNumber(this.getContactNumber());
 		userDTO.setPassword(this.getPassword());
-		userDTO.setAddressList(null);
-		userDTO.setOrdersList(null);
-		userDTO.setRestaurants(null);
-		userDTO.setUserLikesList(null);
-		userDTO.setRoles(null);
-		userDTO.setWallet(null);
+		userDTO.setAddressList(this.getUserAddressDTOList());
+		userDTO.setOrdersList(this.getOrdersDTOList());
+		userDTO.setRestaurants(this.getRestaurantDTOList());
+		userDTO.setUserLikesList(this.getUserLikesDTOList());
+		userDTO.setRoles(this.getRolesDTOList());
+		userDTO.setWallet(this.wallet.getWalletDTOFromWallet());
 		return userDTO;
 	}
 	
-	static Users getUserFromUserDTO(UsersDTO userDTO) {
+	public static Users getUserFromUserDTO(UsersDTO userDTO) {
 		Users user = new Users();
 		user.setUserId(userDTO.getUserId());
 		user.setUserName(userDTO.getUserName());
 		user.setEmailId(userDTO.getEmailId());
 		user.setContactNumber(userDTO.getContactNumber());
 		user.setPassword(userDTO.getPassword());
-		user.setAddressList(null);
-		user.setOrdersList(null);
-		user.setRestaurants(null);
-		user.setRoles(null);
-		user.setUserLikesList(null);
-		user.setWallet(null);
+		user.setAddressList(getUserAddressListFromDTO(userDTO.getAddressList()));
+		user.setOrdersList(getOrdersListFromDTO(userDTO.getOrdersList()));
+		user.setRestaurants(getRestaurantListFromDTO(userDTO.getRestaurants()));
+		user.setRoles(getRolesListFromDTO(userDTO.getRoles()));
+		user.setUserLikesList(getUsersLikesListFromDTO(userDTO.getUserLikesList()));
+		user.setWallet(Wallet.getWalletFromWalletDTO(userDTO.getWallet()));
 		return user;
+	}
+	
+	private List<UserAddressDTO> getUserAddressDTOList() {
+		List<UserAddressDTO> userAddressDTOList = new ArrayList<>();
+		this.getAddressList().
+					forEach(userAddress -> userAddressDTOList.add(userAddress.getAddressDTOFromAddress()));
+		
+		return userAddressDTOList;
+	}
+	
+	private List<RolesDTO> getRolesDTOList() {
+		List<RolesDTO> rolesDTOList = new ArrayList<>();
+		this.getRoles().
+					forEach(role -> rolesDTOList.add(role.getRolesDTOFromRoles()));
+		
+		return rolesDTOList;
+	}
+	
+	private List<RestaurantDTO> getRestaurantDTOList() {
+		List<RestaurantDTO> restaurantDTOList = new ArrayList<>();
+		this.getRestaurants().
+					forEach(restaurant -> restaurantDTOList.add(restaurant.getRestaurantDTOFromRestaurant()));
+		
+		return restaurantDTOList;
+	}
+	
+	private List<UserLikesDTO> getUserLikesDTOList() {
+		List<UserLikesDTO> userLikesDTOList = new ArrayList<>();
+		this.getUserLikesList().
+					forEach(userLikes -> userLikesDTOList.add(userLikes.getUserLikesDTOFromUserLikes()));
+		
+		
+		return userLikesDTOList;
+	}
+	
+	private List<OrdersDTO> getOrdersDTOList() {
+		List<OrdersDTO> ordersDTOList = new ArrayList<>();
+		this.getOrdersList().
+					forEach(orders -> ordersDTOList.add(orders.getOrdersDTOFromOrders()));
+		
+		return ordersDTOList;
+	}
+	
+	private static List<UserAddress> getUserAddressListFromDTO(List<UserAddressDTO> userAddressDTOList) {
+		List<UserAddress> userAddressList= new ArrayList<>();
+		userAddressDTOList.forEach(userAddressDTO -> userAddressList.add(UserAddress.getAddressFromAddressDTO(userAddressDTO)));
+		
+		return userAddressList;
+	}
+	
+	private static List<Roles> getRolesListFromDTO(List<RolesDTO> rolesDTOList) {
+		List<Roles> rolesList = new ArrayList<>();
+		rolesDTOList.forEach(roleDTO -> rolesList.add(Roles.getRolesFromRolesDTO(roleDTO)));
+		
+		return rolesList;
+	}
+	
+	private static List<UserLikes> getUsersLikesListFromDTO(List<UserLikesDTO> userLikesDTOList) {
+		List<UserLikes> userLikesList = new ArrayList<>();
+		userLikesDTOList.forEach(userLikeDTO -> userLikesList.add(UserLikes.getUserLikesFromUserLikesDTO(userLikeDTO)));
+		
+		return userLikesList;
+	}
+	
+	private static List<Restaurant> getRestaurantListFromDTO(List<RestaurantDTO> restaurantDTOList) {
+		List<Restaurant> restaurantList = new ArrayList<>();
+		restaurantDTOList.forEach(restaurantDTO -> restaurantList.add(Restaurant.getRestaurantFromRestaurantDTO(restaurantDTO)));
+		return restaurantList;
+	}
+	
+	private static List<Orders> getOrdersListFromDTO(List<OrdersDTO> ordersDTOList) {
+		List<Orders> ordersList = new ArrayList<>();
+		ordersDTOList.forEach(orderDTO -> ordersList.add(Orders.getOrdersFromOrdersDTO(orderDTO)));
+		return ordersList;
 	}
 }
